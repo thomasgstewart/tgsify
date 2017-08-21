@@ -9,6 +9,7 @@
 #' @export
 #' @examples
 #' require(Hmisc)
+#' require(dplyr)
 #' getHdata(pbc)
 #' tbl1_formula <- bili + albumin + stage + protime + sex + age + spiders ~ drug
 #' tbl <- tbl1_formula %>% 
