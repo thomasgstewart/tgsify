@@ -31,6 +31,22 @@ two_column_consort <- function(
   variable
   , top_box_text
 ){
+  
+  if (!requireNamespace("data.table", quietly = TRUE)) {
+    stop("The data.table package is needed for this function to work.",
+         call. = FALSE)
+  }
+  if (!requireNamespace("dplyr", quietly = TRUE)) {
+    stop("The dplyr package is needed for this function to work.",
+         call. = FALSE)
+  }
+  if (!requireNamespace("dtplyr", quietly = TRUE)) {
+    stop("The dtplyr package is needed for this function to work.",
+         call. = FALSE)
+  }
+  
+  
+  
   top_box <- data.table(
     label = top_box_text,
     N = length(variable),

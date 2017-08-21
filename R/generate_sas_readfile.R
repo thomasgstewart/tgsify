@@ -31,6 +31,22 @@
 #' generate_sas_readfile(iris_dt, "iris3", shortener = shorten)
 
 generate_sas_readfile <- function(data, filename_stub, shortener = function(x){substr(x,1,30)}){
+
+  if (!requireNamespace("data.table", quietly = TRUE)) {
+    stop("The data.table package is needed for this function to work.",
+         call. = FALSE)
+  }
+  if (!requireNamespace("dplyr", quietly = TRUE)) {
+    stop("The dplyr package is needed for this function to work.",
+         call. = FALSE)
+  }
+  if (!requireNamespace("dtplyr", quietly = TRUE)) {
+    stop("The dtplyr package is needed for this function to work.",
+         call. = FALSE)
+  }  
+  
+  if(!"data.table" %in% class(data)) data <- as.data.table(data)
+  
   data <- copy(data)
   vc <- data[,vapply(.SD,class,NA_character_)]
   vn <- copy(names(data))

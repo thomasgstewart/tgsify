@@ -15,10 +15,6 @@
 #' summaryM(data=pbc) %>% 
 #' summaryM_to_df
 
-slice_to_box <- function(x){
-  gsub("[ ]*([\\-]{0,1}[0-9\\.]+)/[ ]*([\\-]{0,1}[0-9\\.]+)/[ ]*([\\-]{0,1}[0-9\\.]+)[ ]*", "\\2 [\\1, \\3]", x)
-}
-
 summaryM_to_df <- function(tbl, html_space=TRUE,...){
   o <- capture.output(print(tbl,...))
   o <- o[-grep("+---",o)]
