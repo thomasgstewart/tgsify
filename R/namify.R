@@ -1,6 +1,5 @@
-#' Namify
-#'
 #' Converts hogwash variable names to proper variable names.
+#' 
 #' @param x A character vector or a data.frame
 #' @details The following changes are made to the text
 #' * Change . to _
