@@ -3,6 +3,7 @@
 export("%|%")
 export(cd)
 export(draw_consort)
+export(explicit_rcs)
 export(findvarname)
 export(generate_sas_readfile)
 export(jby)
