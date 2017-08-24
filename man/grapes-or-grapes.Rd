@@ -2,7 +2,7 @@
 % Please edit documentation in R/glue.R
 \name{\%|\%}
 \alias{\%|\%}
-\title{glue}
+\title{Glue character strings together.}
 \usage{
 a \%|\% b
 }

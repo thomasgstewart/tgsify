@@ -2,7 +2,7 @@
 % Please edit documentation in R/namify.R
 \name{namify}
 \alias{namify}
-\title{Namify}
+\title{Converts hogwash variable names to proper variable names.}
 \usage{
 namify(x)
 }
