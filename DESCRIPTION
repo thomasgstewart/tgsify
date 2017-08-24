@@ -3,7 +3,9 @@ Title: A Collection of R Functions
 Version: 0.0.1
 Authors@R: person("Thomas", "Stewart", email = "thomas.stewart@vanderbilt.edu", role = c("aut", "cre"))
 Description: Provides a collection of R functions.
-Depends: R (>= 3.4.1)
+Depends:
+  R (>= 3.4.1),
+  data.table
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
