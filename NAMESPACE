@@ -2,6 +2,7 @@
 
 export("%|%")
 export(cd)
+export(doj)
 export(draw_consort)
 export(explicit_rcs)
 export(findvarname)

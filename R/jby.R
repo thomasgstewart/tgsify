@@ -1,40 +1,32 @@
-#' Calculate dt[,j,by] within pipes (\%>\%)
+#' Within data.table calculations among pipe chains
 #' 
-#' Perform a within data.table calculation dt[,j,by] within a dplyr pipe construction.
+#' Perform a within data.table calculation dt[,j,by] or dt[,j] within a pipe chain (\%>\%) .
 #' @param data A data.table object, say dt
-#' @param expr1 The \code{j} expression for dt[,j,by]
-#' @param expr2 The \code{by} expression for dt[,j,by]
-#' @details Allows dt[,j,by] calculations withing a pipe chain, such as
-#' 
+#' @param expr_j The \code{j} expression for dt[,j,by]
+#' @param expr_by The \code{by} expression for dt[,j,by]
+#' @details Allows dt[,j,by] or dt[,j] calculations within a pipe chain, such as
+#'
+#' iris \%>\% as.data.table \%>\% doj(mean(Sepal.Length)) \%>\% print 
 #' iris \%>\% as.data.table \%>\% jby(mean(Sepal.Length),Species) \%>\% print
 #' 
-#' @keywords jby
+#' @keywords jby, doj
+#' @name doj
+NULL
+
+#' @rdname doj
 #' @export
 #' @examples
 #' require(data.table); require(dplyr);
 #' iris %>% as.data.table %>% jby(mean(Sepal.Length),Species) %>% print
 
-# jby <- function(data, expr1, expr2){
-#   #browser()
-#   com <- "data[, j = " %|% deparse(substitute(expr1)) %|% ", by =" %|% deparse(substitute(expr2)) %|% "]"
-#   eval(parse(text = com), envir = getEnvOf("data"))
-# }
-# 
-# getEnvOf <- function(what, which=rev(sys.parents())) {
-#   for (frame in which)
-#     if (exists(what, frame=frame, inherits=FALSE)) 
-#       return(sys.frame(frame))
-#   return(NULL)
-# }
-
-# jby <- function (data, expr1, expr2) 
-# {
-#   e1 <- substitute(expr1)
-#   e2 <- substitute(expr2)
-#   invisible(data[, j = eval(e1), by = eval(deparse(e2))])
-# }
-
-
-jby <- function(data,expr1,expr2){
-  invisible(data[,eval(substitute(expr1)),eval(deparse(substitute(expr2)))])
+jby <- function(data,expr_j,expr_by){
+  invisible(data[,eval(substitute(expr_j)),eval(deparse(substitute(expr_by)))])
 }
+
+#' @rdname doj
+#' @export
+#' @examples
+#' require(data.table); require(dplyr);
+#' iris %>% as.data.table %>% doj(mean(Sepal.Length)) %>% print
+
+doj <- function(data,expr_j){invisible(data[,eval(substitute(expr_j))])}
