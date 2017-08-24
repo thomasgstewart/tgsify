@@ -14,7 +14,14 @@
 #' require(data.table); require(dplyr);
 #' iris %>% as.data.table %>% jby(mean(Sepal.Length),Species) %>% print
 
-
-jby <- function(data,expr1,expr2){
-  invisible(data[,eval(substitute(expr1)),eval(deparse(substitute(expr2)))])
+jby <- function (data, expr1, expr2) 
+{
+  e1 <- substitute(expr1)
+  e2 <- substitute(expr2)
+  invisible(data[, j = eval(e1), by = eval(deparse(e2))])
 }
+
+
+# jby <- function(data,expr1,expr2){
+#   invisible(data[,eval(substitute(expr1)),eval(deparse(substitute(expr2)))])
+# }
