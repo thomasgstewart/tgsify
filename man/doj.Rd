@@ -4,7 +4,7 @@
 \alias{doj}
 \alias{jby}
 \alias{doj}
-\title{Within data.table calculations among pipe chains}
+\title{Perform data.table calculations within pipe chains}
 \usage{
 jby(data, expr_j, expr_by)
 
@@ -18,19 +18,24 @@ doj(data, expr_j)
 \item{expr_by}{The \code{by} expression for dt[,j,by]}
 }
 \description{
-Perform a within data.table calculation dt[,j,by] or dt[,j] within a pipe chain (\%>\%) .
+Perform a data.table calculation dt[,j,by] or dt[,j] within a pipe chain (\%>\%) .
 }
 \details{
 Allows dt[,j,by] or dt[,j] calculations within a pipe chain, such as
 
-iris \%>\% as.data.table \%>\% doj(mean(Sepal.Length)) \%>\% print 
-iris \%>\% as.data.table \%>\% jby(mean(Sepal.Length),Species) \%>\% print
+iris \%>\% as.data.table \%>\% doj(mean(Sepal.Length)) \%>\% print
 }
 \examples{
 require(data.table); require(dplyr);
-iris \%>\% as.data.table \%>\% jby(mean(Sepal.Length),Species) \%>\% print
+iris \%>\% 
+  as.data.table \%>\% 
+  jby(mean(Sepal.Length),Species) \%>\% 
+  print
 require(data.table); require(dplyr);
-iris \%>\% as.data.table \%>\% doj(mean(Sepal.Length)) \%>\% print
+iris \%>\% 
+  as.data.table \%>\% 
+  doj(mean(Sepal.Length)) \%>\% 
+  print
 }
 \keyword{doj}
 \keyword{jby,}
