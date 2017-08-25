@@ -17,7 +17,7 @@ NULL
 butterflyplot <- function(x,y, col1 = "#FF000060", col2 = "#3200D360", border1 = "black", border2 = "black", breaks = 100){
 h1 <- hist(x, breaks = breaks, plot = FALSE) 
 x1 <- cut(x, breaks = h1$breaks)
-t1 <- table(x1,y) %>% as.matrix 
+t1 <- as.matrix(table(x1,y))
 t2 <- cbind(t1[,1:2],h1$mids)
 
 plot.new()
@@ -41,7 +41,7 @@ text(-max(t1)/2,nrow(t2)+1,attributes(t1)$dimnames$y[2])
 folded_butterflyplot <- function(x,y, col1 = "#FF000060", col2 = "#3200D360", border1 = "black", border2 = "black", breaks = 100){
   h1 <- hist(x, breaks = breaks, plot = FALSE) 
   x1 <- cut(x, breaks = h1$breaks)
-  t1 <- table(x1,y) %>% as.matrix 
+  t1 <- as.matrix(table(x1,y))
   t2 <- cbind(t1[,1:2],h1$mids)
   
   plot.new()
