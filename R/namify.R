@@ -11,14 +11,14 @@
 #' * If text begins with number, prefix with n
 #' @md
 #' @keywords names
-#' @export
 #' @examples
 #' df_with_proper_variable_names <- namify(iris)
-
+#' @export
 namify <- function(x){
   UseMethod("namify", x)
 }
 
+#' @export
 namify.default <- function(txt){
   txt <- gsub("\\.", "_", txt)          # Change . to _
   txt <- gsub(" +$|^ +|\\(|\\)","",txt) # Remove leading/trailing spaces, (, )
@@ -30,6 +30,7 @@ namify.default <- function(txt){
   return(txt)
 }
 
+#' @export
 namify.data.frame <- function(x){
   names(x) <- namify(names(x))
   return(x)
