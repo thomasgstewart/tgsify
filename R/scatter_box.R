@@ -12,6 +12,7 @@
 #' grp <- rnorm(123) > 0
 #' scatter_box(x~grp)
 #' scatter_box(x~grp, diameter = 1.5)
+#' scatter_box(x~grp, at = c(5,7), diameter = 1.5)
 
 #' @export
 scatter_box <- function(x, ...){
@@ -46,8 +47,14 @@ scatter_box.formula <- function(
   s1 <- split(mf[[response]], mf[-response], drop = drop, 
               sep = sep, lex.order = lex.order)
   b1$jitter <- list()
+  pp <- list(...)
+  if(exists("at",pp)){
+    xs <- pp$at
+  }else{
+    xs <- 1:length(s1)
+  }
   for(j in seq_along(s1)){
-    b1$jitter[[j]] <- regimented_jitter(j, s1[[j]], diameter = diameter, bg = bg)
+    b1$jitter[[j]] <- regimented_jitter(xs[j], s1[[j]], diameter = diameter, bg = bg)
   }
   invisible(b1)
 }

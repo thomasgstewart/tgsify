@@ -26,5 +26,6 @@ x <- rnorm(123)
 grp <- rnorm(123) > 0
 scatter_box(x~grp)
 scatter_box(x~grp, diameter = 1.5)
+scatter_box(x~grp, at = c(5,7), diameter = 1.5)
 }
 \keyword{scatter_box}
