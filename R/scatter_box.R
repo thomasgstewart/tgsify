@@ -1,15 +1,17 @@
 #' Scatter box
 #' 
 #' Generates a boxplot with a regimented scatter plot
+#' @param x A formula which will be sent to boxplot
+#' @param ... Parameters which will be sent to boxplot
 #' @param diameter A scalar which controls the size of the circles in the scatter plot
 #' @param bg The fill color of the circles.
-#' @inheritParams graphics::boxplot
 #' @details Returns, invisibly, the same output list as boxplot with an additional item named \code{jitter} which is the output from \code{regimented_scatter}. 
 #' @keywords scatter_box
 #' @examples
 #' x <- rnorm(123)
 #' grp <- rnorm(123) > 0
 #' scatter_box(x~grp)
+#' scatter_box(x~grp, diameter = 1.5)
 
 #' @export
 scatter_box <- function(x, ...){
@@ -36,7 +38,7 @@ scatter_box.formula <- function(
   m <- match.call(expand.dots = FALSE)
   if (is.matrix(eval(m$data, parent.frame()))) 
     m$data <- as.data.frame(data)
-  m$... <- m$drop <- m$sep <- m$lex.order <- NULL
+  m$... <- m$drop <- m$sep <- m$lex.order <- m$diameter <- m$bg <- NULL
   m$na.action <- na.action
   m[[1L]] <- quote(stats::model.frame)
   mf <- eval(m, parent.frame())
