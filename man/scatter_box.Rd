@@ -7,23 +7,9 @@
 scatter_box(x, ...)
 }
 \arguments{
-\item{x}{for specifying data from which the boxplots are to be
-    produced. Either a numeric vector, or a single list containing such
-    vectors. Additional unnamed arguments specify further data
-    as separate vectors (each corresponding to a component boxplot).
-    \code{\link{NA}}s are allowed in the data.}
+\item{x}{A formula which will be sent to boxplot}
 
-\item{...}{For the \code{formula} method, named arguments to be passed to
-    the default method.
-
-    For the default method, unnamed arguments are additional data
-    vectors (unless \code{x} is a list when they are ignored), and named
-    arguments are arguments and \link{graphical parameters} to be passed
-    to \code{\link{bxp}} in addition to the ones given by argument
-    \code{pars} (and override those in \code{pars}). Note that
-    \code{bxp} may or may not make use of graphical parameters it is
-    passed: see its documentation.
-  }
+\item{...}{Parameters which will be sent to boxplot}
 
 \item{diameter}{A scalar which controls the size of the circles in the scatter plot}
 
@@ -39,5 +25,6 @@ Returns, invisibly, the same output list as boxplot with an additional item name
 x <- rnorm(123)
 grp <- rnorm(123) > 0
 scatter_box(x~grp)
+scatter_box(x~grp, diameter = 1.5)
 }
 \keyword{scatter_box}
