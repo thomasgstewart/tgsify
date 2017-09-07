@@ -21,14 +21,15 @@ regimented_jitter <- function(x,y,diameter = 1, ...){
   x_to_y <- (lims[4] - lims[3])/(lims[2] - lims[1])
   x_diam <- strwidth("x")*diameter
   y_diam <- x_to_y * x_diam
-  y_lims <- range(y, rm.na = TRUE) + c(-1, 1) * y_diam
+  y_lims <- range(y, na.rm = TRUE) + c(-1, 1) * y_diam
   y_cuts <- seq(y_lims[1], y_lims[2], by = y_diam)
   y_mids <- y_cuts[-length(y_cuts)] + y_diam/2
   y_cats <- cut(y,breaks = y_cuts, include.lowest = TRUE, labels = y_mids) %>% 
     as.character %>% 
     as.numeric
-  xx <- x * !is.na(y_cats)
+  xx <- rep(x, length(y))
   
+  y_cats[is.na(y_cats)] <- -Inf
   xx_cats <- by(
     cbind(xx,1:length(xx))
     , y_cats
@@ -39,6 +40,8 @@ regimented_jitter <- function(x,y,diameter = 1, ...){
     arrange(V2) %>% 
     select(xx) %>% 
     `[[`(1)
+  
+  y_cats[is.infinite(y_cats)] <- NA
 
   symbols(xx_cats, y_cats, circles = x_diam/2 * !is.na(y), add = TRUE, inches = FALSE, ...)
   invisible(cbind(y = y, jitter_x = xx_cats, jitter_y = y_cats))
