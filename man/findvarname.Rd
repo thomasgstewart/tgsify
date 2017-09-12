@@ -2,20 +2,25 @@
 % Please edit documentation in R/findvarname.R
 \name{findvarname}
 \alias{findvarname}
-\title{findvarname}
+\title{findvarname and fvn}
 \usage{
-findvarname(var, data = NULL)
+findvarname(pattern, data = NULL)
 }
 \arguments{
-\item{var}{A character string regex search expression}
+\item{pattern}{A character string regex search expression}
 
 \item{data}{A data.frame object}
 }
 \description{
-List variable names which match a search expression
+List variable names / vector items which match a search expression
+}
+\details{
+\code{findvarname} is a legacy function specific to data.frames.  The \code{fvn} function works for character vectors and data.frames.  If the input is a data.frame, the matching variable names are sorted into alphabetical order.  If the input is a character vector, the values are returned in the original order.
 }
 \examples{
 findvarname("length", iris)
-fvn("Sepal",iris)
+fvn(iris, "Sepal")
+fvn(sample(letters,125, replace = TRUE), "A|G")
 }
-\keyword{grep}
+\keyword{findvarname}
+\keyword{fvn}
