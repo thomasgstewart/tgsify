@@ -16,7 +16,7 @@ ve(x, index)
 \item{index}{Index for list or vector}
 }
 \description{
-Aliases for \code{`[[`} and \code{`[`}
+\code{le}---as in list element---is an alias for \code{`[[`}, and \code{ve}---as in vector element---is an alias for \code{`[`}.  The functions simply make pipe chains look cleaner.
 }
 \examples{
 iris \%>\% le(1)

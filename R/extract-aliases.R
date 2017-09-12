@@ -3,6 +3,7 @@
 #'
 #' @title Aliases for \code{`[[`} and \code{`[`}
 #'
+#' @description \code{le}---as in list element---is an alias for \code{`[[`}, and \code{ve}---as in vector element---is an alias for \code{`[`}.  The functions simply make pipe chains look cleaner.
 #' @param x List or vector
 #' @param index Index for list or vector
 NULL
