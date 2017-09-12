@@ -10,7 +10,11 @@
 #' findvarname("length", iris)
 #' fvn(iris, "Sepal")
 #' fvn(sample(letters,125, replace = TRUE), "A|G")
+#' @name findvarname
+NULL
 
+#' @rdname findvarname
+#' @export
 findvarname <- function(pattern, data = NULL){
   if(is.null(data) | !is.data.frame(data)){
     message("Please specify a dataset")
@@ -24,12 +28,14 @@ fvn <- function(data, pattern){
   UseMethod("fvn")
 }
 
+#' @rdname findvarname
 #' @export
 fvn.data.frame <- function(data, pattern){
   fvn.default(names(data), pattern) %>% 
   sort
 }
 
+#' @rdname findvarname
 #' @export
 fvn.default <- function(data, pattern){
   grep(pattern, data, ignore.case = TRUE) %>% 

@@ -2,9 +2,15 @@
 % Please edit documentation in R/findvarname.R
 \name{findvarname}
 \alias{findvarname}
+\alias{fvn.data.frame}
+\alias{fvn.default}
 \title{findvarname and fvn}
 \usage{
 findvarname(pattern, data = NULL)
+
+\method{fvn}{data.frame}(data, pattern)
+
+\method{fvn}{default}(data, pattern)
 }
 \arguments{
 \item{pattern}{A character string regex search expression}
