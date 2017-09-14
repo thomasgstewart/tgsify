@@ -11,6 +11,7 @@
 explicit_rcs <- function(data, formula){
   formula_environment <- environment(formula)
   ff <- gsub(" ", "", deparse(formula[[3]], width.cutoff = 500L))
+  if(length(ff) > 1) do.call(paste, ff %>% as.list)
   while(length(grep("^.*rcs\\(([[:alnum:]_\\.\\(\\)]+),[0-9]+\\).*$",ff))){
     variable <- sub("^.*rcs\\(([[:alnum:]_\\.\\(\\)]+),[0-9]+\\).*$", "\\1", ff)
     eval_variable <- variable
