@@ -239,3 +239,22 @@ partition2 <- function(xlim,ylim,data){
   return(data)
 }
 
+draw_box <- function(text,x,y,box_width,box_height,plot=TRUE,...){
+  x1 <- x - box_width/2
+  y1 <- y - box_height/2
+  x2 <- x + box_width/2
+  y2 <- y + box_height/2
+  
+  if(plot){
+    rect(x1,y1,x2,y2,...)
+    text(x,y,text)
+  }
+  
+  out <- rbind(
+    c(x,y1),
+    c(x1,y),
+    c(x,y2),
+    c(x2,y)
+  )
+  return(out)
+}
