@@ -213,3 +213,29 @@ draw_arraw <- function(arrows,box_centers,box_edges){
   }
 }
 
+partition2 <- function(xlim,ylim,data){
+  
+  nspaces <- length(unique(data$row))
+  cushion_space <- strheight("M\nM")/(sum(data[!duplicated(data$row),'box_height'])+nspaces*strheight("M\nM"))
+  bh <- (data[!duplicated(data$row),'box_height']) /(sum(data[!duplicated(data$row),'box_height'])+nspaces*strheight("M\nM"))+cushion_space
+  data$height_row <- 0
+  data[!duplicated(data$row),'height_row'] <- (ylim[2] - ylim[1])*bh
+  for( i in unique(data$row)){
+    data[data$row==i,'height_row'] <- max(data[data$row==i,'height_row'])
+  }
+  
+  data[,'row_centers'] <- 0
+  for( i in sort(unique(data$row),decreasing=TRUE)){
+    data[data$row==i,'row_centers'] <- sum(data[data$row > i & !duplicated(data$row),'height_row']) + data[data$row == i & !duplicated(data$row),'height_row']/2 + ylim[1]
+  }
+  
+  data[,'col_centers'] <- 0
+  width <- xlim[2] - xlim[1]
+  for( i in unique(data$row) ){
+    col_width <- width /  max(data[data$row==i,'col'])
+    data[data$row==i,'col_centers'] <-  -col_width/2 + col_width*(data[data$row==i,'col']) + xlim[1]
+  }
+  
+  return(data)
+}
+
