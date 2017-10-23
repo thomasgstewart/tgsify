@@ -10,6 +10,8 @@
 
 explicit_rcs <- function(data, formula){
   formula_environment <- environment(formula)
+  lf <- length(formula)
+  if(lf == 2) formula <- update(formula, . ~ .)
   ff <- gsub(" ", "", deparse(formula[[3]], width.cutoff = 500L))
   if(length(ff) > 1) ff <- do.call(paste, c(ff, sep = "") %>% as.list)
   while(length(grep("^.*rcs\\(([[:alnum:]_\\.\\(\\)]+),[0-9]+\\).*$",ff))){
@@ -21,14 +23,14 @@ explicit_rcs <- function(data, formula){
     
     xx <- with(data, eval(parse(text=eval_variable)))
     
-    rcs_x <- Hmisc:::rcspline.eval(x  = xx,
-                                   nk = as.numeric(nknots))
+    rcs_x <- Hmisc:::rcspline.eval(x = xx, nk = as.numeric(nknots))
     knot_locations <- attr(rcs_x,"knots")
     ff <- sub("rcs\\(" %|% variable %|% "," %|% nknots %|% "\\)",
               "rcs\\(" %|% variable %|% ", parms = c(" %|% paste(knot_locations, collapse = ",") %|% ")\\)",
               ff)
   }
   formula <- as.formula(deparse(formula[[2]], width.cutoff = 500) %|% "~" %|% ff)
+  if(lf == 2) formula[[2]] <- NULL
   environment(formula) <- formula_environment
   return(formula)
 }
