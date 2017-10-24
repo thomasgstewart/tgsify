@@ -29,6 +29,7 @@ explicit_rcs <- function(data, formula){
               "rcs\\(" %|% variable %|% ", parms = c(" %|% paste(knot_locations, collapse = ",") %|% ")\\)",
               ff)
   }
+  ff <- gsub("\\+\\+\\+"," ",ff)
   formula <- as.formula(deparse(formula[[2]], width.cutoff = 500) %|% "~" %|% ff)
   if(lf == 2) formula[[2]] <- NULL
   environment(formula) <- formula_environment
