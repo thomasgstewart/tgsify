@@ -4,10 +4,12 @@
 \alias{htmlify_rownames}
 \title{Converts hogwash rownames and dimnames to HTML friendly names}
 \usage{
-htmlify_rownames(x)
+htmlify_rownames(x, ef = 2)
 }
 \arguments{
 \item{x}{An array or data.frame}
+
+\item{ef}{Numeric.  The expansion factor.  Number of HTML spaces for each leading space.}
 }
 \description{
 Converts hogwash rownames and dimnames to HTML friendly names
