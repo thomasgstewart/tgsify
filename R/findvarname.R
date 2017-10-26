@@ -1,19 +1,19 @@
-#' findvarname and fvn
+#' @name findvarname
+#' @rdname findvarname
+#' @title findvarname, fvn, & fv
 #'
-#' List variable names / vector items which match a search expression
+#' @description List variable names / vector items which match a search expression
 #' @param pattern A character string regex search expression
 #' @param data A data.frame object
-#' @details \code{findvarname} is a legacy function specific to data.frames.  The \code{fvn} function works for character vectors and data.frames.  If the input is a data.frame, the matching variable names are sorted into alphabetical order.  If the input is a character vector, the values are returned in the original order.
-#' @keywords findvarname fvn
-#' @export
-#' @examples
-#' findvarname("length", iris)
-#' fvn(iris, "Sepal")
-#' fvn(sample(letters,125, replace = TRUE), "A|G")
-#' @name findvarname
+#' @details \code{findvarname} is a legacy function specific to data.frames.  The \code{fvn} function works for character vectors and data.frames.  If the input is a data.frame, the matching variable names are sorted into alphabetical order.  If the input is a character vector, the values are returned in the original order.  
+#' 
+#' The function \code{fv} allows for non-standard evaluation, i.e., the search pattern does not need to be in quotes.
+#' @keywords findvarname fvn fv
 NULL
 
 #' @rdname findvarname
+#' @examples
+#' findvarname("length", iris)
 #' @export
 findvarname <- function(pattern, data = NULL){
   if(is.null(data) | !is.data.frame(data)){
@@ -23,6 +23,10 @@ findvarname <- function(pattern, data = NULL){
   }
 }
 
+#' @rdname findvarname
+#' @examples
+#' fvn(iris, "Sepal")
+#' fvn(sample(letters,125, replace = TRUE), "A|G")
 #' @export
 fvn <- function(data, pattern){
   UseMethod("fvn")
@@ -41,3 +45,9 @@ fvn.default <- function(data, pattern){
   grep(pattern, data, ignore.case = TRUE) %>% 
     (function(x){data[x]})
 }
+
+#' @rdname findvarname
+#' @examples
+#' iris %>% fv(Sepal)
+#' @export
+fv <- function(data, pattern) fvn(data, deparse(substitute(pattern)))

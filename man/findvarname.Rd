@@ -2,15 +2,21 @@
 % Please edit documentation in R/findvarname.R
 \name{findvarname}
 \alias{findvarname}
+\alias{fvn}
 \alias{fvn.data.frame}
 \alias{fvn.default}
-\title{findvarname and fvn}
+\alias{fv}
+\title{findvarname, fvn, & fv}
 \usage{
 findvarname(pattern, data = NULL)
+
+fvn(data, pattern)
 
 \method{fvn}{data.frame}(data, pattern)
 
 \method{fvn}{default}(data, pattern)
+
+fv(data, pattern)
 }
 \arguments{
 \item{pattern}{A character string regex search expression}
@@ -21,12 +27,16 @@ findvarname(pattern, data = NULL)
 List variable names / vector items which match a search expression
 }
 \details{
-\code{findvarname} is a legacy function specific to data.frames.  The \code{fvn} function works for character vectors and data.frames.  If the input is a data.frame, the matching variable names are sorted into alphabetical order.  If the input is a character vector, the values are returned in the original order.
+\code{findvarname} is a legacy function specific to data.frames.  The \code{fvn} function works for character vectors and data.frames.  If the input is a data.frame, the matching variable names are sorted into alphabetical order.  If the input is a character vector, the values are returned in the original order.  
+
+The function \code{fv} allows for non-standard evaluation, i.e., the search pattern does not need to be in quotes.
 }
 \examples{
 findvarname("length", iris)
 fvn(iris, "Sepal")
 fvn(sample(letters,125, replace = TRUE), "A|G")
+iris \%>\% fv(Sepal)
 }
 \keyword{findvarname}
+\keyword{fv}
 \keyword{fvn}
