@@ -12,8 +12,8 @@
 #' require(dplyr)
 #' getHdata(pbc)
 #' tbl1_formula <- bili + albumin + stage + protime + sex + age + spiders ~ drug
-#' tbl <- tbl1_formula %>% 
-#' summaryM(data=pbc) %>% 
+#' tbl <- tbl1_formula %>%
+#' summaryM(data=pbc) %>%
 #' summaryM_to_df
 
 summaryM_to_df <- function(tbl, html_space=TRUE,...){
@@ -24,11 +24,14 @@ summaryM_to_df <- function(tbl, html_space=TRUE,...){
   o <- gsub("\\( *", "\\(", o)
   nc <- length(strsplit(o[1],"\\|")[[1]])
   out <- as.data.frame(array(NA_character_,dim=c(length(o),nc)),stringsAsFactors=FALSE)
-  
+
   for(i in 1:length(o)) out[i,] <- strsplit(o[i],"\\|")[[1]]
   names(out) <- out[1,]
   out <- out[-1,]
-  if(html_space) out[,1] <- gsub(" ","&nbsp;", out[,1])
+  if(html_space){
+    out[,1] <- gsub("( )\\1*$","", out[,1])
+    out[,1] <- gsub(" ", "&nbsp;", out[,1])
+  }
   rownames(out) <- NULL
   return(out)
 }

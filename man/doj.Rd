@@ -3,6 +3,7 @@
 \name{doj}
 \alias{doj}
 \alias{jby}
+\alias{doj}
 \title{Perform data.table calculations within pipe chains}
 \usage{
 jby(data, expr_j, expr_by)
