@@ -24,7 +24,7 @@ levelmap <- function(x, map, type = "c"){
   if(type == "c"){
     Z <- merge(data.frame(V1 = x, xo = 1:length(x), stringsAsFactors = FALSE), map, by.x = "V1", by.y = names(map)[1], all.x = TRUE)
     if(nrow(Z) != length(x)) stop("LEVELMAP: Merge of variable and map produced incorrect number of observations.")
-    browser()
+    
     W <- Z[[3]][order(Z$xo)]
     attr(W, "label") <- label
     return(W)
