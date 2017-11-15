@@ -10,8 +10,8 @@
 #' @examples
 #' set.seed(234)
 #' xm <- data.frame(
-#'     0:1
-#'   , c("The zero category","The one category")
+#'     A = 0:1
+#'   , B = c("The zero category","The one category")
 #'   , stringsAsFactors = FALSE)
 #' x <- rbinom(50, 1, .4)
 #' levelmap(x, xm)
@@ -22,9 +22,10 @@ levelmap <- function(x, map, type = "c"){
   
   label <- if(!is.null(attr(x, "label"))){attr(x, "label")}else{NULL}
   if(type == "c"){
-    Z <- merge(data.frame(V1 = x, stringsAsFactors = FALSE), map, by.x = "V1", by.y = names(map)[1], all.x = TRUE)
+    Z <- merge(data.frame(V1 = x, xo = 1:length(x), stringsAsFactors = FALSE), map, by.x = "V1", by.y = names(map)[1], all.x = TRUE)
     if(nrow(Z) != length(x)) stop("LEVELMAP: Merge of variable and map produced incorrect number of observations.")
-    W <- Z[[2]]
+    browser()
+    W <- Z[[3]][order(Z$xo)]
     attr(W, "label") <- label
     return(W)
   }

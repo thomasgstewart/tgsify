@@ -22,8 +22,8 @@ The function perpetuates the input label attribute to the output.
 \examples{
 set.seed(234)
 xm <- data.frame(
-    0:1
-  , c("The zero category","The one category")
+    A = 0:1
+  , B = c("The zero category","The one category")
   , stringsAsFactors = FALSE)
 x <- rbinom(50, 1, .4)
 levelmap(x, xm)
