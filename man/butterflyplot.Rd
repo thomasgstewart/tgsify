@@ -2,6 +2,7 @@
 % Please edit documentation in R/butterflyplot.R
 \name{butterflyplot}
 \alias{butterflyplot}
+\alias{butterflyplot}
 \alias{folded_butterflyplot}
 \title{Butterfly plot}
 \usage{
