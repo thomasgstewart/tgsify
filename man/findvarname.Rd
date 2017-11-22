@@ -2,7 +2,6 @@
 % Please edit documentation in R/findvarname.R
 \name{findvarname}
 \alias{findvarname}
-\alias{findvarname}
 \alias{fvn}
 \alias{fvn.data.frame}
 \alias{fvn.default}

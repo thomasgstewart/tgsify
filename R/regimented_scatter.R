@@ -17,10 +17,16 @@
 #' regimented_jitter(1, y, diameter = 1.5, bg = "gray80")
 
 regimented_jitter <- function(x,y,diameter = 1, ...){
-  lims <- par()$usr
-  x_to_y <- (lims[4] - lims[3])/(lims[2] - lims[1])
-  x_diam <- strwidth("x")*diameter
-  y_diam <- x_to_y * x_diam
+
+  pl <- par()$usr
+  I <- diag(c(diff(pl[1:2]), diff(pl[3:4]))/2)
+  P <- diag(par()$pin/2)
+  Mpi <- solve(t(P) %*% P) %*% t(P) %*% I
+  
+  y_diam <- strheight("+") * diameter
+  swap <- matrix(c(0,1,1,0), 2, 2)
+  x_diam <- t(c(0, y_diam)) %*% solve(Mpi) %*% swap %*% Mpi %>% `[`(1,1)
+  
   y_lims <- range(y, na.rm = TRUE) + c(-1, 1) * y_diam
   y_cuts <- seq(y_lims[1], y_lims[2], by = y_diam)
   y_mids <- y_cuts[-length(y_cuts)] + y_diam/2
