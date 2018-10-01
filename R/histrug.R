@@ -60,16 +60,44 @@ histrug <- function(x, height_pct = 10, col = "black", z = NULL, axis = 1){
   M <- matrix(c(1 + adj, -adj, -adj, 1 + adj), 2, 2)
   N <- solve(M)
   
-  # New Y axis
-  zz <- c(0,z)
-  if(axis == 3) zz <- rev(zz)
-  plot.window(ylim = N %*% zz, xlim = N %*% c(usr[1], usr[2]))
   
-  # Add hist
-  hist(x, breaks = 100, add = TRUE, col = col)
+  # Axis 1 & 3
+  if(axis %in% c(1,3)){
+    zz <- c(0,z)
+    if(axis == 3) zz <- rev(zz)
+    plot.window(ylim = N %*% zz, xlim = N %*% c(usr[1], usr[2]))
+    
+    # Add hist
+    hist(x, breaks = 100, add = TRUE, col = col)
+    
+    # Return axes to original
+    plot.window(ylim = N %*% usr[3:4], xlim = N %*% usr[1:2])
+  }
   
-  # Return axes to original
-  plot.window(ylim = N %*% usr[3:4], xlim = N %*% usr[1:2])
+  
+  # Axis 2 & 4
+  if(axis %in% c(2,4)){
+    pl <- usr
+    I <- diag(c(diff(pl[1:2]), diff(pl[3:4]))/2)
+    P <- diag(par()$pin/2)
+    Mpi <- solve(t(P) %*% P) %*% t(P) %*% I
+    
+    y_diam <- z * height_pct / 100
+    swap <- matrix(c(0,1,1,0), 2, 2)
+    x_diam <- t(c(0, y_diam)) %*% Mpi %*% swap %*% solve(Mpi) %>% `[`(1,1)
+    x_diam/height_pct*100
+    zz <- c(0, x_diam)
+    if(axis == 4) zz <- rev(zz)
+    plot.window(ylim = N %*% c(usr[3], usr[4]), xlim = N %*% zz)
+    
+    # Add hist
+    barplot(hstats$mids, hstats$counts, horiz = TRUE, add = TRUE)
+    hist(x, breaks = 100, add = TRUE, col = col)
+    
+    # Return axes to original
+    plot.window(ylim = N %*% usr[3:4], xlim = N %*% usr[1:2])
+  }
+  
   
   invisible(z)
 }

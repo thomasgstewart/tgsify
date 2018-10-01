@@ -34,10 +34,7 @@ draw_consort <- function(data, arrows, phantom = NULL){
   #
   # ADD title with title(main=title, outer=TRUE)
   # ADD text in top right corner with   mtext(format(Sys.time(), "%Y-%m-%d %H:%M"),3,outer=TRUE,adj=1)
-  require(data.table)
-  require(dtplyr)
-  require(dplyr)
-  
+
   # ADD PHANTOM NODES TO DATA
   if(!is.null(phantom) & is.data.frame(phantom)){
     # Remove phantom nodes that are duplicated in the data (row, col)
@@ -158,7 +155,7 @@ draw_consort <- function(data, arrows, phantom = NULL){
 }
 
 draw_arraw <- function(arrows,box_centers,box_edges){
-  require(showtext)
+  suppressPackageStartupMessages(require(showtext))
   for(i in 1:nrow(arrows)){
     
     same_row <- box_centers[box_centers[,'node'] == arrows[i,'from'],'row'] == box_centers[box_centers[,'node'] == arrows[i,'to'],'row']
