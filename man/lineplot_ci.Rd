@@ -5,10 +5,10 @@
 \title{Line plot with confidence interval}
 \usage{
 lineplot_ci(x, y, y_lb, y_ub, data = NULL, add = FALSE,
-  line_col = "darkblue", ci_col = "gray80", type = "l", xlim = NULL,
-  ylim = NULL, log = "", xlab = NULL, ylab = NULL, ann = par("ann"),
-  axes = TRUE, frame.plot = axes, panel.first = grid(),
-  panel.last = NULL, asp = NA, ...)
+  line_col = "darkblue", ci_col = "gray80", type = "l",
+  xlim = NULL, ylim = NULL, log = "", xlab = NULL, ylab = NULL,
+  ann = par("ann"), axes = TRUE, frame.plot = axes,
+  panel.first = grid(), panel.last = NULL, asp = NA, ...)
 }
 \arguments{
 \item{x, y, y_lb, y_ub}{Column name or column number for the respective \code{data}}
