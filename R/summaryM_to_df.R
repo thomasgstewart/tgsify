@@ -33,5 +33,6 @@ summaryM_to_df <- function(tbl, html_space=TRUE,...){
     out[,1] <- gsub(" ", "&nbsp;", out[,1])
   }
   rownames(out) <- NULL
+  colnames(out) <- trimws(names(out))
   return(out)
 }
