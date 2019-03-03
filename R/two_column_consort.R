@@ -16,7 +16,7 @@
 #'     "3 2 Petal length > 6",
 #'     ifelse(
 #'       sepal_width >= 3 & sepal_width < 4,
-#'       "4 2 Sepal Width ∊ [3, 4)",
+#'       "4 2 Sepal Width in [3, 4)",
 #'       "5 1 Study population"
 #'     )
 #'   )
