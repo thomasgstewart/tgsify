@@ -23,7 +23,7 @@
 #'   plotstyle(upright) %>% 
 #'   plot
 
-plotstyle <- function(data = NULL, style = NULL){
+plotstyle <- function(data = NULL, style = NULL,...){
   pstl <- deparse(substitute(style))
   
   if(pstl == "NULL"){
@@ -54,5 +54,6 @@ plotstyle <- function(data = NULL, style = NULL){
       las = 1
     )
   }
+  par(...)
   invisible(data)
 }
