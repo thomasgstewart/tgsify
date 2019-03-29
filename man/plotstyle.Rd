@@ -4,7 +4,7 @@
 \alias{plotstyle}
 \title{A collection of plotting parameters}
 \usage{
-plotstyle(data = NULL, style = NULL)
+plotstyle(data = NULL, style = NULL, ...)
 }
 \arguments{
 \item{data}{NULL or data.frame / data.table.  See details.}

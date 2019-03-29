@@ -21,7 +21,7 @@ Formats p-values the way I like them
 \examples{
 formatp(runif(1))
 formatp(0.0001)
-formatp(0.023, sig_marker = c("☺ ", " ★ I'm addicted to p-values ★"))
-formatp(0.051, sig_marker = c("☺ ", " ★ I'm addicted to p-values ★"))
+formatp(0.023, sig_marker = c(":) ", " * I'm addicted to p-values *"))
+formatp(0.051, sig_marker = c(":) ", " * I'm addicted to p-values *"))
 }
 \keyword{formatp}
