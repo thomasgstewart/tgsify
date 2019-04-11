@@ -33,6 +33,11 @@ summaryM_to_df <- function(tbl, html_space=TRUE,...){
     out[,1] <- gsub(" ", "&nbsp;", out[,1])
   }
   rownames(out) <- NULL
-  colnames(out) <- trimws(names(out))
+  cn <- trimws(names(out))
+  ne <- sum(cn=="")
+  rcn <- rep(NA, ne)
+  for(i in 1:ne) rcn[i] <- paste(rep(" ", i), collapse = "")
+  cn[cn==""] <- rcn
+  colnames(out) <- cn
   return(out)
 }
