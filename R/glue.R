@@ -1,5 +1,6 @@
 #' Glue character strings together.
 #'
+#' @name glue
 #' @param a A character string
 #' @param b A character string
 #' @keywords paste0
