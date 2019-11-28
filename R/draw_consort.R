@@ -21,7 +21,7 @@ draw_consort <- function(data, arrows, phantom = NULL){
   #        N         - Number in node
   #        sum_node  - (DISCONTINUED) node of parent(s) - use c(node1, node2, ...) for multi parent nodes
   #        plot      - logical - plot the node?
-  #        group     - (optional) number (boxes of the group type are the same size)
+  #        type      - (optional) number (boxes of the same type are the same size)
   #        color     - (optional) color of box, default is white, NA is white
   # arrows - data.frame with the following columns
   #          from - number of node (arrow start)
@@ -56,9 +56,10 @@ draw_consort <- function(data, arrows, phantom = NULL){
     
     if(nrow(phantom)>0){
       data <-
-        as.data.table(phantom) %>%
+        phantom %>%
         mutate(plot = FALSE) %>%
         mutate(type = -1) %>%
+        as.data.table %>% 
         rbind(
           as.data.table(data)
           , fill=TRUE
@@ -112,9 +113,7 @@ draw_consort <- function(data, arrows, phantom = NULL){
   par(mar=rep(0,4), oma=c(.5,.5,1,.5))
   plot.new()
   plot.window(xlim=c(-1,1), ylim=c(0,1), xaxs="i", yaxs="i")
-  
-  
-  
+
   # BOX WIDTH AND HEIGHT SCHEMES (TYPE)
   for(j in unique(data$type)){
     data$box_width[data$type == j] <- max(strwidth(data$label[data$type == j]) + strwidth("M"))
@@ -170,11 +169,11 @@ draw_arraw <- function(arrows,box_centers,box_edges){
       shortest <- which(ddd == min(ddd), arr.ind = TRUE)
       to_from <- eee[shortest+c(5,0),]
       lines(to_from,lwd=2)
-      #showtext.begin()
+      showtext.begin()
       # Left or right arrow
       if(to_from[1,1] > to_from[2, 1]) text(eee[shortest[1]+5,1],eee[shortest[1]+5,2],"\u25BA",cex=1.5)
       if(to_from[1,1] < to_from[2, 1]) text(eee[shortest[1]+5,1],eee[shortest[1]+5,2],"\u25C4",cex=1.5)
-      #showtext.end()
+      showtext.end()
     }else{
       
       ll <- rbind(
@@ -203,9 +202,9 @@ draw_arraw <- function(arrows,box_centers,box_edges){
       #triangle
       R <- c(0,1,-1,0)
       dim(R) <- c(2,2)
-      #showtext.begin()
+      showtext.begin()
       text(l2[2,1],l2[2,2],"\u25BC",cex=1.5)
-      #showtext.end()
+      showtext.end()
     }
   }
 }

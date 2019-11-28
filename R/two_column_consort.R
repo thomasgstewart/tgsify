@@ -53,22 +53,26 @@ two_column_consort <- function(
     row = 1,
     col = 1,
     sum_node = 1,
-    node = 1
+    node = 1, 
+    var = ""
   )
   
   dt <- data.table(var = variable)
   consort <-
     dt[,.N,var][order(var)] %>%
+    as.data.frame %>% 
     mutate(label = gsub("^([0-9]+) ([0-9]+) (.*)$","\\3", var)) %>%
     mutate(row   = gsub("^([0-9]+) ([0-9]+) (.*)$","\\1", var)) %>%
     mutate(col   = gsub("^([0-9]+) ([0-9]+) (.*)$","\\2", var)) %>%
     mutate(row = as.numeric(row), col = as.numeric(col)) %>%
     mutate(node = 1:length(N) + 1, sum_node = 1) %>%
+    as.data.table %>% 
     rbind(top_box, use.names = TRUE, fill = TRUE) %>%
+    as.data.frame %>% 
     mutate(plot = TRUE) %>%
     select(-var) %>%
-    arrange(row)
-  
+    arrange(row) %>% 
+    as.data.table
   
   max_row <- consort[, max(row)]
   
