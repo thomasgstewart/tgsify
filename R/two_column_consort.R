@@ -44,7 +44,10 @@ two_column_consort <- function(
     stop("The dtplyr package is needed for this function to work.",
          call. = FALSE)
   }
-  
+  if (!requireNamespace("showtext", quietly = TRUE)) {
+    stop("The showtext package is needed for this function to work.",
+         call. = FALSE)
+  }
   
   
   top_box <- data.table(

@@ -5,11 +5,25 @@
 \alias{folded_butterflyplot}
 \title{Butterfly plot}
 \usage{
-butterflyplot(x, y, col1 = "#FF000060", col2 = "#3200D360",
-  border1 = "black", border2 = "black", breaks = 100)
+butterflyplot(
+  x,
+  y,
+  col1 = "#FF000060",
+  col2 = "#3200D360",
+  border1 = "black",
+  border2 = "black",
+  breaks = 100
+)
 
-folded_butterflyplot(x, y, col1 = "#FF000060", col2 = "#3200D360",
-  border1 = "black", border2 = "black", breaks = 100)
+folded_butterflyplot(
+  x,
+  y,
+  col1 = "#FF000060",
+  col2 = "#3200D360",
+  border1 = "black",
+  border2 = "black",
+  breaks = 100
+)
 }
 \arguments{
 \item{x}{A numeric vector}

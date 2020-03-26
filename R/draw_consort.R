@@ -169,11 +169,11 @@ draw_arraw <- function(arrows,box_centers,box_edges){
       shortest <- which(ddd == min(ddd), arr.ind = TRUE)
       to_from <- eee[shortest+c(5,0),]
       lines(to_from,lwd=2)
-      showtext.begin()
+      showtext_begin()
       # Left or right arrow
       if(to_from[1,1] > to_from[2, 1]) text(eee[shortest[1]+5,1],eee[shortest[1]+5,2],"\u25BA",cex=1.5)
       if(to_from[1,1] < to_from[2, 1]) text(eee[shortest[1]+5,1],eee[shortest[1]+5,2],"\u25C4",cex=1.5)
-      showtext.end()
+      showtext_end()
     }else{
       
       ll <- rbind(
@@ -202,9 +202,9 @@ draw_arraw <- function(arrows,box_centers,box_edges){
       #triangle
       R <- c(0,1,-1,0)
       dim(R) <- c(2,2)
-      showtext.begin()
+      showtext_begin()
       text(l2[2,1],l2[2,2],"\u25BC",cex=1.5)
-      showtext.end()
+      showtext_end()
     }
   }
 }

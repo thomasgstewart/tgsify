@@ -4,8 +4,7 @@
 \alias{star}
 \title{Create star plots}
 \usage{
-star(fat = 0.8, n_flairs = 5, theta = 0, plot = FALSE,
-  add = FALSE)
+star(fat = 0.8, n_flairs = 5, theta = 0, plot = FALSE, add = FALSE)
 }
 \arguments{
 \item{fat}{A number between 0 and 1.  This parameter controls the relative distance from the star's inner radius to the outer radius.  Values close to 0 generate long spikes; values close to 1 generate fat spikes.}

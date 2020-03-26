@@ -4,8 +4,17 @@
 \alias{plot_setup}
 \title{Setup a plot}
 \usage{
-plot_setup(d, f, xlim = NULL, ylim = NULL, log = "", asp = NA,
-  xaxs = "r", yaxs = "r", ...)
+plot_setup(
+  d,
+  f,
+  xlim = NULL,
+  ylim = NULL,
+  log = "",
+  asp = NA,
+  xaxs = "r",
+  yaxs = "r",
+  ...
+)
 }
 \arguments{
 \item{d}{A data.frame.}

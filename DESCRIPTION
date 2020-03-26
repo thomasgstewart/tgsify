@@ -7,8 +7,9 @@ Depends:
   R (>= 3.4.1),
   data.table,
   dplyr,
-  dtplyr
+  dtplyr,
+  showtext
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.1

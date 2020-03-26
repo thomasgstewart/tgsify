@@ -4,8 +4,11 @@
 \alias{generate_sas_readfile}
 \title{Generates .csv and .sas files from a data.table}
 \usage{
-generate_sas_readfile(data, filename_stub, shortener = function(x) {    
-  substr(x, 1, 30) })
+generate_sas_readfile(
+  data,
+  filename_stub,
+  shortener = function(x) {     substr(x, 1, 30) }
+)
 }
 \arguments{
 \item{data}{A data.table object}

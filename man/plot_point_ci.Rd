@@ -4,8 +4,17 @@
 \alias{plot_point_ci}
 \title{Coefficient Plot}
 \usage{
-plot_point_ci(point, lb, ub, labels, data, vertical_lines = NULL,
-  col = NULL, xlim = NULL, ...)
+plot_point_ci(
+  point,
+  lb,
+  ub,
+  labels,
+  data,
+  vertical_lines = NULL,
+  col = NULL,
+  xlim = NULL,
+  ...
+)
 }
 \arguments{
 \item{point}{Column name or column number for the point estimate variable in \code{data}}
