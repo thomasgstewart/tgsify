@@ -82,5 +82,7 @@ missingness_info <- function(
     stringsAsFactors    = FALSE,
     check.names         = FALSE
   )
-  return(list(out1,out2))
+  out <- list(out1,out2)
+  class(out) <- "missingness-info"
+  return(out)
 }
