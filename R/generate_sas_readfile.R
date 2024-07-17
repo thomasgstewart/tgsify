@@ -46,9 +46,13 @@ generate_sas_readfile <- function(data, filename_stub, shortener = function(x){s
   }  
   
   if(!"data.table" %in% class(data)) data <- as.data.table(data)
-  
+  class_no_labelled <- function(x){
+    y <- class(x)
+    if("labelled" %in% y) y <- setdiff(y, "labelled")
+    y[1]
+  }
   data <- copy(data)
-  vc <- data[,vapply(.SD,class,NA_character_)]
+  vc <- data[,vapply(.SD,class_no_labelled,NA_character_)]
   vn <- copy(names(data))
   for(j in 1:ncol(data)){
     vj <- vn[j]
@@ -61,6 +65,7 @@ generate_sas_readfile <- function(data, filename_stub, shortener = function(x){s
       new <- shortener(vj)
       setnames(data, vj, new)
       message("SAS name limit: " %|% vj %|% " renamed to " %|% new)
+      vj <- new
     }
     if(length(grep("\\W", vj))){
       new <- gsub("\\W","_", vj)
@@ -70,7 +75,7 @@ generate_sas_readfile <- function(data, filename_stub, shortener = function(x){s
   }
   
   tpe <- function(x){ifelse(sum(!is.na(x))==0, "empty",typeof(x))}
-  nch <- function(x){ifelse(is.character(x), max(nchar(x)), NA)}
+  nch <- function(x){ifelse(is.character(x), max(nchar(x), na.rm = TRUE), NA)}
   dt <- data.table(
     varname = names(data)
     , type = unlist(data[,lapply(.SD, tpe)])
