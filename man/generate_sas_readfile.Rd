@@ -2,13 +2,27 @@
 % Please edit documentation in R/generate_sas_readfile.R
 \name{generate_sas_readfile}
 \alias{generate_sas_readfile}
+\alias{sasify}
+\alias{shorten_no_vowels}
 \title{Generates .csv and .sas files from a data.table}
 \usage{
 generate_sas_readfile(
   data,
   filename_stub,
-  shortener = function(x) {     substr(x, 1, 30) }
+  shortener = function(x) {
+     substr(x, 1, 30)
+ }
 )
+
+sasify(
+  data,
+  filename_stub,
+  shortener = function(x) {
+     substr(x, 1, 30)
+ }
+)
+
+shorten_no_vowels(x)
 }
 \arguments{
 \item{data}{A data.table object}
@@ -33,6 +47,8 @@ The variable listing provides details on variable names, type, length, and the o
 \item the variable name was changed to comply with variable name character count restrictions, or
 \item non alpha-numeric characters were removed from the variable name.
 }
+
+\code{shorten_no_vowels} is a custom shortener which removes vowels prior to selecting the first 30 characters
 }
 \examples{
 iris_dt <- as.data.table(iris)

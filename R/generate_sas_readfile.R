@@ -10,7 +10,9 @@
 #' 
 #' The variable listing provides details on variable names, type, length, and the original variable name (unabridged_name) if 
 #' * the variable name was changed to comply with variable name character count restrictions, or
-#' * non alpha-numeric characters were removed from the variable name.  
+#' * non alpha-numeric characters were removed from the variable name.
+#' 
+#' `shorten_no_vowels` is a custom shortener which removes vowels prior to selecting the first 30 characters
 #' @md
 #' @keywords SAS
 #' @export
@@ -109,4 +111,17 @@ generate_sas_readfile <- function(data, filename_stub, shortener = function(x){s
       (function(x){paste(capture.output(print(x)), collapse = "\n")}) %>% 
       warning
   }
+}
+
+#' @rdname generate_sas_readfile
+#' @aliases generate_sas_readfile
+#' @export
+sasify <- generate_sas_readfile
+
+
+#' @rdname generate_sas_readfile
+#' @export
+shorten_no_vowels <- function(x){
+   y <- gsub("a|e|i|o|u","",x)
+   substr(y,1,30)
 }

@@ -2,7 +2,6 @@
 #' 
 #' @param x A tgsify object
 #' @md
-#' @examples
 #' @export
 htmlify <- function(x){
   UseMethod("htmlify", x)
