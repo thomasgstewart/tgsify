@@ -88,7 +88,13 @@ generate_sas_readfile <- function(data, filename_stub, shortener = function(x){s
   
   dt[,infile_command := varname %|% ifelse(type=="character", " :$" %|% length %|% ".", "") %|% "\n"]
   
-  infile <- "DATA DATA;\nINFILE \"" %|% filename_stub %|% ".csv\" 	DSD DLM=','  LRECL=20000  missover firstobs = 2 termstr=lf;\nINPUT\n"
+  infile <- "DATA DATA;\nINFILE \"" %|% filename_stub %|% ".csv\" 	DSD DLM=','  LRECL=20000  missover firstobs = 2 termstr=EOL;\nINPUT\n"
+
+if(.Platform$OS.type == "unix"){
+  infile <- infile %>% gsub("EOL","lf",.)
+}else{
+  infile <- infile %>% gsub("EOL","crlf",.)
+}
   
   cat(infile, dt[,infile_command], ";\nRUN;", file = filename_stub %|% ".sas")
   
@@ -103,6 +109,7 @@ generate_sas_readfile <- function(data, filename_stub, shortener = function(x){s
     data
     , file = filename_stub %|% ".csv"
     , row.names = FALSE
+    , na = "."
   )
   
   if(dt[,sum(duplicated(varname))>0]){
